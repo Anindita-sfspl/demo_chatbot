@@ -10,8 +10,8 @@
   <div class="w-full max-w-3xl mx-auto p-4 flex-grow">
     <div class="bg-[#2C2C6C] shadow-xl rounded-3xl px-8 py-10 relative">
 
-      <!-- Logo -->
-      <div class="flex justify-center mb-6">
+      <!-- Logo + Logout (same row) -->
+      <div class="flex items-center justify-center mb-6 relative">
         <div class="bg-white rounded-2xl px-6 py-3 shadow-md inline-flex items-center justify-center">
           <img
             src="https://raw.githubusercontent.com/da-sfspl/logo/1f152b53ba5e2d24ccabb3adf43ecc0e8b5438bf/Sampurna%20logo%20final%20without%20tagline%20png(2)%202%20(1).png"
@@ -19,6 +19,18 @@
             class="h-10 md:h-12 object-contain"
           />
         </div>
+
+        <!-- Logout button (right side of logo) -->
+        <!-- Logout button (top-right, pink like Download Report) -->
+<button
+  type="button"
+  onclick="logout()"
+  class="absolute right-0 top-4 bg-pink-500 text-white text-sm font-semibold px-4 py-2 rounded-xl shadow-lg hover:bg-pink-600 transition"
+  title="Logout"
+>
+  Logout
+</button>
+
       </div>
 
       <h1 class="text-2xl md:text-3xl font-semibold text-center text-white">
@@ -138,6 +150,24 @@
 <script>
   const N8N_WEBHOOK_URL = "https://n8n.srv896137.hstgr.cloud/webhook/Report_data";
 
+  // OPTIONAL (recommended for demo): block access if not logged in
+  // Use the same key you set in login page after auth success.
+  // Example: localStorage.setItem("auth", "true")
+  //
+  // (function routeGuard(){
+  //   const isAuth = localStorage.getItem("auth") === "true";
+  //   if(!isAuth) window.location.href = "index.html";
+  // })();
+
+  function logout() {
+    // Clear any auth markers you used in login page
+    localStorage.removeItem("auth");
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    sessionStorage.clear(); // safe nuke for session state
+    window.location.href = "index.html";
+  }
+
   const deptBtn = document.getElementById("deptDropdownButton");
   const deptDropdown = document.getElementById("deptDropdown");
   const deptSelectedText = document.getElementById("deptSelectedText");
@@ -189,6 +219,8 @@
     if (!fromDate || !toDate || new Date(fromDate) > new Date(toDate)) {
       document.getElementById("dateError").classList.remove("hidden");
       return;
+    } else {
+      document.getElementById("dateError").classList.add("hidden");
     }
 
     const params = new URLSearchParams({
