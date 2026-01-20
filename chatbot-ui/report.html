@@ -20,16 +20,15 @@
           />
         </div>
 
-        <!-- Logout button (right side of logo) -->
         <!-- Logout button (top-right, pink like Download Report) -->
-<button
-  type="button"
-  onclick="logout()"
-  class="absolute right-0 top-4 bg-pink-500 text-white text-sm font-semibold px-4 py-2 rounded-xl shadow-lg hover:bg-pink-600 transition"
-  title="Logout"
->
-  Logout
-</button>
+        <button
+          type="button"
+          onclick="logout()"
+          class="absolute right-0 top-4 bg-pink-500 text-white text-sm font-semibold px-4 py-2 rounded-xl shadow-lg hover:bg-pink-600 transition"
+          title="Logout"
+        >
+          Logout
+        </button>
 
       </div>
 
@@ -86,12 +85,12 @@
                   <input type="radio" name="department" class="dept-option mr-2" value="LAVANYA" />
                   <span>LAVANYA</span>
                 </label>
-				
-			    <label class="flex items-center px-3 py-2 hover:bg-slate-50 cursor-pointer">
+
+                <label class="flex items-center px-3 py-2 hover:bg-slate-50 cursor-pointer">
                   <span class="w-2 h-2 rounded-full bg-amber-500 mr-2"></span>
-                  <input type="radio" name="department" class="dept-option mr-2" value="ACCOUNTS" />
-                 <span>Accounts</span>
-               </label>
+                  <input type="radio" name="department" class="dept-option mr-2" value="Accounts" />
+                  <span>Accounts</span>
+                </label>
 
               </div>
             </div>
@@ -157,21 +156,11 @@
 <script>
   const N8N_WEBHOOK_URL = "https://n8n.srv896137.hstgr.cloud/webhook/Report_data";
 
-  // OPTIONAL (recommended for demo): block access if not logged in
-  // Use the same key you set in login page after auth success.
-  // Example: localStorage.setItem("auth", "true")
-  //
-  // (function routeGuard(){
-  //   const isAuth = localStorage.getItem("auth") === "true";
-  //   if(!isAuth) window.location.href = "index.html";
-  // })();
-
   function logout() {
-    // Clear any auth markers you used in login page
     localStorage.removeItem("auth");
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    sessionStorage.clear(); // safe nuke for session state
+    sessionStorage.clear();
     window.location.href = "index.html";
   }
 
@@ -248,5 +237,6 @@
     link.click();
   });
 </script>
+
 </body>
 </html>
